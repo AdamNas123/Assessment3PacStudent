@@ -469,7 +469,7 @@ GameObject:
   - component: {fileID: 853731591}
   - component: {fileID: 853731593}
   m_Layer: 0
-  m_Name: PacStudent-Up_0
+  m_Name: PacStudent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
