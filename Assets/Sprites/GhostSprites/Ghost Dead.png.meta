@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2e7e9ec4f95f0f2439fdc556406e3a33
+guid: 04d4d4b4ce76c6d4189ad926ba8ef6ac
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -130,7 +130,70 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ghost Dead_0
+      name: Ghost Dead (1)_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 41
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26b6574e477c1e74684106df274d542b
+      internalID: 1493761410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost Dead (1)_1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 41
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc09c6eb6c62e434bb4c7af266c65cc2
+      internalID: -473866860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost Dead (1)_2
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 41
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acc2cfcffba3f1f4982c8a467258e6c3
+      internalID: -1570475337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ghost Dead (1)_3
       rect:
         serializedVersion: 2
         x: 8
@@ -144,8 +207,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6216ab4156bbd6e418d5dce75d25e6a7
-      internalID: -1958688413
+      spriteID: b47c553c6cd8bc24495147a0366e0701
+      internalID: -1423180402
       vertices: []
       indices: 
       edges: []
@@ -153,7 +216,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 1e1620550dcfa0c4d8ac594530ed94e1
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +224,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Ghost Dead_0: -1958688413
+      Ghost Dead (1)_2: -1570475337
+      Ghost Dead (1)_3: -1423180402
+      Ghost Dead (1)_0: 1493761410
+      Ghost Dead (1)_1: -473866860
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
