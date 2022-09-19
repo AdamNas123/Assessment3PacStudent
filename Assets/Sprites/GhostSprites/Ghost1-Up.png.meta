@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 441a247b9735bea459a7240dc0b18e5b
+guid: c1b283a8a4579624a9944b01d61def81
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -144,8 +144,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eaf8f033abd336646b7f54140a980cbc
-      internalID: 2084068834
+      spriteID: ea35900e77e1f584d93d9a588c9dbfc0
+      internalID: -1712874568
       vertices: []
       indices: 
       edges: []
@@ -165,8 +165,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97bc1fa7525a3db4ba2da3edc732d7ef
-      internalID: -1494998317
+      spriteID: cfd52e42f8fad7745b539a8bd51f8c23
+      internalID: 1600219255
       vertices: []
       indices: 
       edges: []
@@ -186,8 +186,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb1dd2cd6fa85ca4ab2d5f45a113d2d3
-      internalID: 1152559858
+      spriteID: 44e366a0ebf9a0f4bb722b3f54a4d364
+      internalID: 1789497952
       vertices: []
       indices: 
       edges: []
@@ -207,8 +207,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 92598ef6e5f789b4cb4af0394d367f15
-      internalID: -335088509
+      spriteID: bca041e3d0a40774c8d04ec8b3855d31
+      internalID: -1177233307
       vertices: []
       indices: 
       edges: []
@@ -216,7 +216,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 84934065a60a39e4baad4c2303b42514
+    spriteID: 4f4f918a186527a42b08101dbb2f2bd6
     internalID: 0
     vertices: []
     indices: 
@@ -224,10 +224,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Ghost1-Up_1: -1494998317
-      Ghost1-Up_2: 1152559858
-      Ghost1-Up_0: 2084068834
-      Ghost1-Up_3: -335088509
+      Ghost1-Up_1: 1600219255
+      Ghost1-Up_2: 1789497952
+      Ghost1-Up_0: -1712874568
+      Ghost1-Up_3: -1177233307
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 

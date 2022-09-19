@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6b45b52938a9c224d8c62da0e96d89de
+guid: 5a5baba7babfdf94a928293e9a7e5be0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -144,8 +144,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 922a5c74f3e75f447b0e9bae83247624
-      internalID: -586188631
+      spriteID: 0f4e7d4f58654bc4ca52c3cf9d66a70d
+      internalID: 90639648
       vertices: []
       indices: 
       edges: []
@@ -165,8 +165,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2b1127d4c0215f4e955ca0ed7b7779b
-      internalID: 739971392
+      spriteID: c9ab24faae0156d4f99d060fa1847b47
+      internalID: -818978553
       vertices: []
       indices: 
       edges: []
@@ -186,8 +186,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7bd0b4e1095bcdf4883f3dcf5e05f106
-      internalID: 621256654
+      spriteID: 3a04febaadb958448b665ac038739855
+      internalID: 1857291854
       vertices: []
       indices: 
       edges: []
@@ -207,8 +207,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b700d590bfd00bd4cb201c489603b22d
-      internalID: -974299071
+      spriteID: 8a450ea0831135443939a622bc4d5501
+      internalID: -277302452
       vertices: []
       indices: 
       edges: []
@@ -216,7 +216,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: b11c2b8d29e07b44b977a748eed03305
+    spriteID: 5d850e4a35de822418fd7f3f9d1c6712
     internalID: 0
     vertices: []
     indices: 
@@ -224,10 +224,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Ghost1 -RightLeft_1: 739971392
-      Ghost1 -RightLeft_3: -974299071
-      Ghost1 -RightLeft_0: -586188631
-      Ghost1 -RightLeft_2: 621256654
+      Ghost1 -RightLeft_1: -818978553
+      Ghost1 -RightLeft_3: -277302452
+      Ghost1 -RightLeft_0: 90639648
+      Ghost1 -RightLeft_2: 1857291854
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
