@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a4e1f8c0ea2ef2c4cbb286dc04cc2172
+guid: 1ee34cfe450e7f242a22c1dd9b0e5ef9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 20
+  spritePixelsToUnits: 4
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -70,7 +70,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -130,13 +130,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Outside Wall_0
+      name: Outside Wall1_0
       rect:
         serializedVersion: 2
         x: 14
         y: 13
         width: 4
-        height: 6
+        height: 4
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,8 +144,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21897a3a0c02b2441a0a9bbb6a29a716
-      internalID: -1412976255
+      spriteID: a3282495d43979d45aaf45050aea3402
+      internalID: 1456315454
       vertices: []
       indices: 
       edges: []
@@ -153,7 +153,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 9bbb7373d6bd5f44ead0609c58cb1030
+    spriteID: 6e1cda448d22e1e42a679dd94e849270
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Outside Wall_0: -1412976255
+      Outside Wall1_0: 1456315454
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
