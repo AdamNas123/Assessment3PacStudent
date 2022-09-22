@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2bb322b9dcaa5db4dbfdec2a778f7f45
+guid: 48927870cb77e9140a869332fd10b35a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 25
+  spritePixelsToUnits: 18
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -71,7 +71,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -130,7 +130,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Power Pellet_0
+      name: Power Pellet (1)_0
       rect:
         serializedVersion: 2
         x: 7
@@ -144,14 +144,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 312a9aba33af80640a412e184eacc6b0
-      internalID: -434340832
+      spriteID: 17b3b9b1ffbe47045afad26974d7bdf7
+      internalID: 1675666356
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Power Pellet_1
+      name: Power Pellet (1)_1
       rect:
         serializedVersion: 2
         x: 39
@@ -165,14 +165,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c45c444867812445b6424f49204438b
-      internalID: -170835668
+      spriteID: ca982fa505ca6f04ca567a3eb3622363
+      internalID: 1747971883
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Power Pellet_2
+      name: Power Pellet (1)_2
       rect:
         serializedVersion: 2
         x: 71
@@ -186,8 +186,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a05666e27a72744db2b6b1a9037c19d
-      internalID: -652584414
+      spriteID: 39f1c5d284cbebd40a10a15bbe17526f
+      internalID: -86170852
       vertices: []
       indices: 
       edges: []
@@ -195,7 +195,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5a004d580edd56f47856cf1edb56b6b5
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -203,9 +203,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Power Pellet_2: -652584414
-      Power Pellet_1: -170835668
-      Power Pellet_0: -434340832
+      Power Pellet (1)_1: 1747971883
+      Power Pellet (1)_2: -86170852
+      Power Pellet (1)_0: 1675666356
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
