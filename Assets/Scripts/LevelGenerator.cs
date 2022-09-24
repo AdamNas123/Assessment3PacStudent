@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class LevelGenerator : MonoBehaviour
 {
-    private Tilemap tilemap;
+    private GameObject tilemap;
     int[,] levelMap =
     {
         {1,2,2,2,2,2,2,2,2,2,2,2,2,7},
@@ -24,11 +23,27 @@ public class LevelGenerator : MonoBehaviour
         {2,2,2,2,2,1,5,3,3,0,4,0,0,0},
         {0,0,0,0,0,0,5,0,0,0,4,0,0,0},
     };
+
+    public GameObject outsideCorner;
+    public GameObject outsideWall;
+    public GameObject insideCorner;
+    public GameObject insideWall;
+    public GameObject pellet;
+    public GameObject powerPellet;
+    public GameObject tJunction;
     // Start is called before the first frame update
     void Start()
     {
-        tilemap = GetComponent<Tilemap>();
-        tilemap.ClearAllTiles();
+        tilemap = GameObject.Find("Grid");
+        Destroy(tilemap);
+
+        for (int i = 0; i < levelMap.GetLength(0); ++ i)
+        {
+            for (int j = 0; j < levelMap.GetLength(1); ++j)
+            {
+                Instantiate(outsideCorner, new Vector3(-17.5f, 0.5f, 0.0f), Quaternion.identity);
+            }
+        }
     }
 
     // Update is called once per frame
