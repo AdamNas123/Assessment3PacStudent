@@ -20,85 +20,63 @@ public class Movement : MonoBehaviour
         movingNoPellet = GetComponent<AudioSource>();
         rightTween = new Tween(gameObject.transform, new Vector3(-16.5f, -1.5f, 0.0f), new Vector3(-11.5f, -1.5f, 0.0f), Time.time, 1.5f);
         activeTween = rightTween;
+        movingNoPellet.loop = true;
+        movingNoPellet.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //movingNoPellet.Play();
+        if (Vector3.Distance(activeTween.Target.position, activeTween.EndPos) > 0.1f)
+        {
+            float elapsedTime = Time.time - activeTween.StartTime;
+            float t = elapsedTime / activeTween.Duration;
+            activeTween.Target.position = Vector3.Lerp(activeTween.StartPos, activeTween.EndPos, t);
+            SetAnimation();
+        }
+        else if (activeTween == rightTween)
+        {
+            downTween = new Tween(gameObject.transform, new Vector3(-11.5f, -1.5f, 0.0f), new Vector3(-11.5f, -5.5f, 0.0f), Time.time, 1.2f);
+            activeTween = downTween;
+        }
+        else if (activeTween == downTween)
+        {
+            leftTween = new Tween(gameObject.transform, new Vector3(-11.5f, -5.5f, 0.0f), new Vector3(-16.5f, -5.5f, 0.0f), Time.time, 1.5f);
+            activeTween = leftTween;
+        }
+        else if (activeTween == leftTween)
+        {
+            upTween = new Tween(gameObject.transform, new Vector3(-16.5f, -5.5f, 0.0f), new Vector3(-16.5f, -1.5f, 0.0f), Time.time, 1.2f);
+            activeTween = upTween;
+        }
+        else if (activeTween == upTween)
+        {
+            rightTween = new Tween(gameObject.transform, new Vector3(-16.5f, -1.5f, 0.0f), new Vector3(-11.5f, -1.5f, 0.0f), Time.time, 1.5f);
+            activeTween = rightTween;
+        }
+    }
+
+    private void SetAnimation()
+    {
         if (activeTween == rightTween)
         {
-            if (Vector3.Distance(activeTween.Target.position, activeTween.EndPos) > 0.1f)
-            {
-                float elapsedTime = Time.time - activeTween.StartTime;
-                float t = elapsedTime / activeTween.Duration;
-                activeTween.Target.position = Vector3.Lerp(activeTween.StartPos, activeTween.EndPos, t);
-                movingNoPellet.Play();
-                pacStudentAnimator.Play("PacStudentRightAnim");
-
-            }
-            else 
-            {
-                activeTween.Target.position = activeTween.EndPos;
-                downTween = new Tween(gameObject.transform, new Vector3(-11.5f, -1.5f, 0.0f), new Vector3(-11.5f, -5.5f, 0.0f), Time.time, 1.2f);
-                activeTween = downTween;
-            }
-        }
-        
-        if (activeTween == downTween)
-        {
-            if (Vector3.Distance(activeTween.Target.position, activeTween.EndPos) > 0.1f)
-            {
-                float elapsedTime = Time.time - activeTween.StartTime;
-                float t = elapsedTime / activeTween.Duration;
-                activeTween.Target.position = Vector3.Lerp(activeTween.StartPos, activeTween.EndPos, t);
-                movingNoPellet.Play();
-                pacStudentAnimator.Play("PacStudentDownAnim");
-
-            }
-            else
-            {
-                activeTween.Target.position = activeTween.EndPos;
-                leftTween = new Tween(gameObject.transform, new Vector3(-11.5f, -5.5f, 0.0f), new Vector3(-16.5f, -5.5f, 0.0f), Time.time, 1.5f);
-                activeTween = leftTween;
-            }
+            pacStudentAnimator.Play("PacStudentRightAnim");
         }
 
         if (activeTween == leftTween)
         {
-            if (Vector3.Distance(activeTween.Target.position, activeTween.EndPos) > 0.1f)
-            {
-                float elapsedTime = Time.time - activeTween.StartTime;
-                float t = elapsedTime / activeTween.Duration;
-                activeTween.Target.position = Vector3.Lerp(activeTween.StartPos, activeTween.EndPos, t);
-                movingNoPellet.Play();
-                pacStudentAnimator.Play("PacStudentLeftAnim");
-
-            }
-            else
-            {
-                activeTween.Target.position = activeTween.EndPos;
-                upTween = new Tween(gameObject.transform, new Vector3(-16.5f, -5.5f, 0.0f), new Vector3(-16.5f, -1.5f, 0.0f), Time.time, 1.2f);
-                activeTween = upTween;
-            }
+            pacStudentAnimator.Play("PacStudentLeftAnim");
         }
 
         if (activeTween == upTween)
         {
-            if (Vector3.Distance(activeTween.Target.position, activeTween.EndPos) > 0.1f)
-            {
-                float elapsedTime = Time.time - activeTween.StartTime;
-                float t = elapsedTime / activeTween.Duration;
-                activeTween.Target.position = Vector3.Lerp(activeTween.StartPos, activeTween.EndPos, t);
-                movingNoPellet.Play();
-                pacStudentAnimator.Play("PacStudentUpAnim");
+            pacStudentAnimator.Play("PacStudentUpAnim");
+        }
 
-            }
-            else
-            {
-                activeTween.Target.position = activeTween.EndPos;
-                rightTween = new Tween(gameObject.transform, new Vector3(-16.5f, -1.5f, 0.0f), new Vector3(-11.5f, -1.5f, 0.0f), Time.time, 1.5f);
-                activeTween = rightTween;
-            }
+        if (activeTween == downTween)
+        {
+            pacStudentAnimator.Play("PacStudentDownAnim");
         }
     }
 }
