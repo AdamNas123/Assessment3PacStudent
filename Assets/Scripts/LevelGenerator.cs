@@ -24,16 +24,14 @@ public class LevelGenerator : MonoBehaviour
         {0,0,0,0,0,0,5,0,0,0,4,0,0,0},
     };
 
-    public GameObject outsideCorner;
-    public GameObject outsideWall;
-    public GameObject insideCorner;
-    public GameObject insideWall;
-    public GameObject pellet;
-    public GameObject powerPellet;
-    public GameObject tJunction;
+
+    public GameObject[] mapParts = new GameObject[8];
+    private Vector3 startPos = new Vector3(-17.5f, -0.5f, 0.0f);
+    private float rotation;
     // Start is called before the first frame update
     void Start()
     {
+        //Delete manual map
         tilemap = GameObject.Find("Grid");
         Destroy(tilemap);
 
@@ -41,7 +39,14 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int j = 0; j < levelMap.GetLength(1); ++j)
             {
-                Instantiate(outsideCorner, new Vector3(-17.5f, 0.5f, 0.0f), Quaternion.identity);
+                if (mapParts[levelMap[i,j]].Equals(1))
+                {
+                    if (levelMap[i - 1, j].Equals(null))
+                    {
+                        rotation = 270;
+                    }
+                }
+                Instantiate(mapParts[levelMap[i,j]], startPos + new Vector3(j, -i, 0.0f), Quaternion.Euler(0.0f, 0.0f, rotation));
             }
         }
     }
