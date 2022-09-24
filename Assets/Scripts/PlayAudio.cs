@@ -9,8 +9,8 @@ public class PlayAudio : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        introSource.Play();
-        normalStateSource.PlayDelayed(introSource.clip.length);
+        //introSource.Play();
+        //normalStateSource.PlayDelayed(introSource.clip.length);
     }
 
     // Update is called once per frame
