@@ -163,8 +163,10 @@ public class LevelGenerator : MonoBehaviour
                 if (fullLevelMap[i, j].Equals(7))
                 {
                     //Checks if there is an outside wall or t juncture at the top and bottom
-                    if ((fullLevelMap[i - 1, j].Equals(2) || fullLevelMap[i - 1, j].Equals(7)) && (fullLevelMap[i + 1, j].Equals(2) || fullLevelMap[i + 1, j].Equals(7)))
+                    //if (((i > 0 && fullLevelMap[i - 1, j].Equals(2) || fullLevelMap[i - 1, j].Equals(7))) && (i < fullLevelMap.GetLength(0) - 1 && (fullLevelMap[i + 1, j].Equals(2) || fullLevelMap[i + 1, j].Equals(7))))
+                    if (i < fullLevelMap.GetLength(0) - 1 && (fullLevelMap[i + 1, j].Equals(2) || fullLevelMap[i + 1, j].Equals(7)))
                     {
+
                         //Checks if there is an inside wall to the left
                         if (fullLevelMap[i, j - 1].Equals(4) && mapRotation[i, j - 1].Equals(90))
                         {
@@ -176,15 +178,15 @@ public class LevelGenerator : MonoBehaviour
                         }   
                     }
                     //Checks if there is an outside wall or t juncture to the left and right
-                    else if ((fullLevelMap[i, j - 1].Equals(2) || fullLevelMap[i, j - 1].Equals(7)) && (fullLevelMap[i, j + 1].Equals(2) || fullLevelMap[i, j + 1].Equals(7)))
+                    else //if ((fullLevelMap[i, j - 1].Equals(2) || fullLevelMap[i, j - 1].Equals(7)) && (fullLevelMap[i, j + 1].Equals(2) || fullLevelMap[i, j + 1].Equals(7)))
                     {
-                        if (fullLevelMap[i - 1, j].Equals(4) && mapRotation[i - 1, j].Equals(0))
+                        if (i < fullLevelMap.GetLength(0) - 1 && fullLevelMap[i + 1, j].Equals(4) && mapRotation[i + 1, j].Equals(0))
                         {
-                            rotation = 180;
+                            rotation = 0;
                         }
                         else
                         {
-                            rotation = 0;
+                            rotation = 180;
                         }
                     }
                 }
