@@ -53,6 +53,7 @@ public class LevelGenerator : MonoBehaviour
         Destroy(powerPellet2);
         Destroy(powerPellet3);
         Destroy(powerPellet4);
+
         //Extend given level map to get whole map
         fullLevelMap = new int[2 * levelMap.GetLength(0) - 1, 2 *  levelMap.GetLength(1)];
 
@@ -92,9 +93,10 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int j = 0; j < fullLevelMap.GetLength(1); ++j)
             {
+                //Outside Wall Piece
                 if (fullLevelMap[i,j].Equals(2))
                 {
-                    if (((i-1) < 0 || fullLevelMap[i - 1, j].Equals(0)) && (fullLevelMap[i+1,j].Equals(0) || fullLevelMap[i + 1, j].Equals(5) || fullLevelMap[i + 1, j].Equals(6)))
+                    if (((i - 1) < 0 || fullLevelMap[i - 1, j].Equals(0)) && (fullLevelMap[i+1,j].Equals(0) || fullLevelMap[i + 1, j].Equals(5) || fullLevelMap[i + 1, j].Equals(6)))
                     {
                         rotation = 270;
                     }
@@ -102,7 +104,12 @@ public class LevelGenerator : MonoBehaviour
                     {
                         rotation = 0;
                     }
-                    if (((i + 1) == fullLevelMap.GetLength(0) || fullLevelMap[i + 1, j].Equals(0)) && (fullLevelMap[i - 1, j].Equals(0) || fullLevelMap[i - 1, j].Equals(5) || fullLevelMap[i - 1, j].Equals(6)))
+                    //if (((i + 1) == fullLevelMap.GetLength(0) || fullLevelMap[i + 1, j].Equals(0)) && (fullLevelMap[i - 1, j].Equals(0) || fullLevelMap[i - 1, j].Equals(5) || fullLevelMap[i - 1, j].Equals(6)))
+                    if ((i + 1) == fullLevelMap.GetLength(0) || (i - 1) >= 0 && (fullLevelMap[i - 1, j].Equals(5) || fullLevelMap[i - 1, j].Equals(6)))
+                    {
+                        rotation = 90;
+                    } 
+                    if((i + 2) < fullLevelMap.GetLength(0) && fullLevelMap[i + 1, j].Equals(0) && fullLevelMap[i + 2, j].Equals(0))
                     {
                         rotation = 90;
                     }
