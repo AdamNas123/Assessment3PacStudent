@@ -74,7 +74,7 @@ public class LevelGenerator : MonoBehaviour
             {
                 if (fullLevelMap[i,j].Equals(2))
                 {
-                    if ((i-1) < 0 && (fullLevelMap[i+1,j].Equals(0) || fullLevelMap[i + 1, j].Equals(5) || fullLevelMap[i + 1, j].Equals(6)))
+                    if (((i-1) < 0 || fullLevelMap[i - 1, j].Equals(0)) && (fullLevelMap[i+1,j].Equals(0) || fullLevelMap[i + 1, j].Equals(5) || fullLevelMap[i + 1, j].Equals(6)))
                     {
                         rotation = 270;
                     }
@@ -82,7 +82,7 @@ public class LevelGenerator : MonoBehaviour
                     {
                         rotation = 0;
                     }
-                    if ((i + 1) == fullLevelMap.GetLength(0) && (fullLevelMap[i - 1, j].Equals(0) || fullLevelMap[i - 1, j].Equals(5) || fullLevelMap[i - 1, j].Equals(6)))
+                    if (((i + 1) == fullLevelMap.GetLength(0) || fullLevelMap[i + 1, j].Equals(0)) && (fullLevelMap[i - 1, j].Equals(0) || fullLevelMap[i - 1, j].Equals(5) || fullLevelMap[i - 1, j].Equals(6)))
                     {
                         rotation = 90;
                     }
@@ -93,10 +93,49 @@ public class LevelGenerator : MonoBehaviour
                 }
                 if (fullLevelMap[i, j].Equals(3))
                 {
+                    if (fullLevelMap[i-1,j].Equals(4) || fullLevelMap[i - 1, j].Equals(3))
+                    {
+                        if (fullLevelMap[i, j - 1].Equals(4) || fullLevelMap[i, j - 1].Equals(3)) //And rotation is vertical
+                        {
+                            rotation = 90;
+                        }
+                        else if (fullLevelMap[i, j + 1].Equals(4) || fullLevelMap[i, j + 1].Equals(3))
+                        {
+                            rotation = 0;
+                        }
+                    }
+
+                    if (fullLevelMap[i + 1, j].Equals(4) || fullLevelMap[i + 1, j].Equals(3))
+                    {
+                        if (fullLevelMap[i, j - 1].Equals(4) || fullLevelMap[i, j - 1].Equals(3))
+                        {
+                            rotation = 180;
+                        }
+                        else if (fullLevelMap[i, j + 1].Equals(4) || fullLevelMap[i, j + 1].Equals(3))
+                        {
+                            rotation = 270;
+                        }
+                    }
+                }
+
+                if (fullLevelMap[i, j].Equals(4))
+                {
+                    if ((fullLevelMap[i - 1, j].Equals(4) || fullLevelMap[i - 1, j].Equals(3) || fullLevelMap[i - 1, j].Equals(7)) && (fullLevelMap[i + 1, j].Equals(4) || fullLevelMap[i + 1, j].Equals(3) || fullLevelMap[i + 1, j].Equals(7)) && (!fullLevelMap[i, j - 1].Equals(4) || !fullLevelMap[i, j + 1].Equals(3)))
+                    {
+                        rotation = 0;
+                    }
+                    else
+                    {
+                        rotation = 90;
+                    }
+                }
+
+                if (fullLevelMap[i, j].Equals(7))
+                {
 
                 }
                 Instantiate(mapParts[fullLevelMap[i,j]], startPos + new Vector3(j, -i, 0.0f), Quaternion.Euler(0.0f, 0.0f, rotation));
-                rotation = 0.0f;
+                rotation = 0;
             }
         }
     }
