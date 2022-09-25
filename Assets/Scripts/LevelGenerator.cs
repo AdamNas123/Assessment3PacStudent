@@ -35,18 +35,68 @@ public class LevelGenerator : MonoBehaviour
         tilemap = GameObject.Find("Grid");
         Destroy(tilemap);
 
-        for (int i = 0; i < levelMap.GetLength(0); ++ i)
+        //Extend given level map to get whole map
+        int[,] fullLevelMap = new int[2 * levelMap.GetLength(0) - 1, 2 *  levelMap.GetLength(1)];
+
+        for (int i = 0; i < fullLevelMap.GetLength(0); ++i)
         {
-            for (int j = 0; j < levelMap.GetLength(1); ++j)
+            for (int j = 0; j < fullLevelMap.GetLength(1); ++j)
             {
-                if (mapParts[levelMap[i,j]].Equals(1))
+                if (i < levelMap.GetLength(0) && j < levelMap.GetLength(1))
                 {
-                    if (levelMap[i - 1, j].Equals(null))
+                    fullLevelMap[i, j] = levelMap[i, j];
+                }
+                
+                if (i < levelMap.GetLength(0) && j >= levelMap.GetLength(1))
+                {
+                    fullLevelMap[i, j] = levelMap[i, fullLevelMap.GetLength(1) - j - 1];       
+                }
+
+                if (i >= levelMap.GetLength(0) && j < levelMap.GetLength(1))
+                {
+                    fullLevelMap[i, j] = levelMap[fullLevelMap.GetLength(0) - i - 1, j];
+                }
+
+                if (i >= levelMap.GetLength(0) && j >= levelMap.GetLength(1))
+                {
+                    fullLevelMap[i, j] = levelMap[fullLevelMap.GetLength(0) - i - 1, fullLevelMap.GetLength(1) - j - 1];
+                }
+            }
+        }
+        
+        
+        //Create procedural map
+                
+        //Loop through row by row, and column by column
+        for (int i = 0; i < fullLevelMap.GetLength(0); ++i)
+        {
+            for (int j = 0; j < fullLevelMap.GetLength(1); ++j)
+            {
+               /* if (levelMap[i,j].Equals(2))
+                {
+                    if ((i-1) < 0 && (levelMap[i+1,j].Equals(0) || levelMap[i + 1, j].Equals(5) || levelMap[i + 1, j].Equals(6)))
                     {
                         rotation = 270;
                     }
+                    if ((j - 1) < 0 && (levelMap[i, j + 1].Equals(0) || levelMap[i, j + 1].Equals(5) || levelMap[i, j + 1].Equals(6)))
+                    {
+                        rotation = 0;
+                    }
+                    if ((i + 1) > levelMap.GetLength(0) && (levelMap[i - 1, j].Equals(0) || levelMap[i - 1, j].Equals(5) || levelMap[i - 1, j].Equals(6)))
+                    {
+                        rotation = 90;
+                    }
+                    if ((j + 1) > levelMap.GetLength(1) && (levelMap[i , j - 1].Equals(0) || levelMap[i, j - 1].Equals(5) || levelMap[i, j - 1].Equals(6)))
+                    {
+                        rotation = 180;
+                    }
                 }
-                Instantiate(mapParts[levelMap[i,j]], startPos + new Vector3(j, -i, 0.0f), Quaternion.Euler(0.0f, 0.0f, rotation));
+                if (levelMap[i, j].Equals(3))
+                {
+
+                }*/
+                Instantiate(mapParts[fullLevelMap[i,j]], startPos + new Vector3(j, -i, 0.0f), Quaternion.Euler(0.0f, 0.0f, rotation));
+                rotation = 0.0f;
             }
         }
     }
