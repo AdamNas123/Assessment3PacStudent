@@ -28,6 +28,9 @@ public class LevelGenerator : MonoBehaviour
     public GameObject[] mapParts = new GameObject[8];
     private Vector3 startPos = new Vector3(-17.5f, -0.5f, 0.0f);
     private float rotation;
+
+    private int[,] fullLevelMap;
+    private float[,] mapRotation;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +39,7 @@ public class LevelGenerator : MonoBehaviour
         Destroy(tilemap);
 
         //Extend given level map to get whole map
-        int[,] fullLevelMap = new int[2 * levelMap.GetLength(0) - 1, 2 *  levelMap.GetLength(1)];
+        fullLevelMap = new int[2 * levelMap.GetLength(0) - 1, 2 *  levelMap.GetLength(1)];
 
         for (int i = 0; i < fullLevelMap.GetLength(0); ++i)
         {
@@ -63,7 +66,9 @@ public class LevelGenerator : MonoBehaviour
                 }
             }
         }
-        
+
+        //Create Rotation Array
+        mapRotation = new float[fullLevelMap.GetLength(0), fullLevelMap.GetLength(1)];
         
         //Create procedural map
                 
@@ -91,27 +96,40 @@ public class LevelGenerator : MonoBehaviour
                         rotation = 180;
                     }
                 }
+
+                //Inside Corner Piece
                 if (fullLevelMap[i, j].Equals(3))
                 {
-                    if (fullLevelMap[i-1,j].Equals(4) || fullLevelMap[i - 1, j].Equals(3))
+                    //Checks if there is a correctly rotated wall or corner on top
+                    if ((fullLevelMap[i-1,j].Equals(4) && mapRotation[i-1,j].Equals(0)) || (fullLevelMap[i - 1, j].Equals(3) && (mapRotation[i - 1, j].Equals(180) || mapRotation[i - 1, j].Equals(270))))
                     {
-                        if (fullLevelMap[i, j - 1].Equals(4) || fullLevelMap[i, j - 1].Equals(3)) //And rotation is vertical
+                        //Checks if there is a correctly rotated wall or corner to the left
+                        if ((fullLevelMap[i, j - 1].Equals(4) && mapRotation[i, j - 1].Equals(90)) || (fullLevelMap[i, j - 1].Equals(3) && (mapRotation[i, j - 1].Equals(0) || mapRotation[i - 1, j].Equals(270)))) 
                         {
                             rotation = 90;
                         }
-                        else if (fullLevelMap[i, j + 1].Equals(4) || fullLevelMap[i, j + 1].Equals(3))
+
+                        //Checks if there is a correctly rotated wall or corner to the right
+                        //else if ((fullLevelMap[i, j + 1].Equals(4) && mapRotation[i, j + 1].Equals(90)) || (fullLevelMap[i, j + 1].Equals(3) && (mapRotation[i, j + 1].Equals(90) || mapRotation[i, j + 1].Equals(180))))
+                        else if ((fullLevelMap[i, j + 1].Equals(4)) || (fullLevelMap[i, j + 1].Equals(3)))
                         {
                             rotation = 0;
                         }
                     }
 
-                    if (fullLevelMap[i + 1, j].Equals(4) || fullLevelMap[i + 1, j].Equals(3))
+                    //Checks if there is a correctly rotated wall or corner on the bottom
+                    //else if ((fullLevelMap[i + 1, j].Equals(4) && mapRotation[i + 1, j].Equals(0)) || (fullLevelMap[i + 1, j].Equals(3) && ( mapRotation[i + 1, j].Equals(0) || mapRotation[i + 1, j].Equals(90))))
+                    else if ((fullLevelMap[i + 1, j].Equals(4)) || (fullLevelMap[i + 1, j].Equals(3)))
                     {
-                        if (fullLevelMap[i, j - 1].Equals(4) || fullLevelMap[i, j - 1].Equals(3))
+                        //Checks if there is a correctly rotated wall or corner to the left
+                        if ((fullLevelMap[i, j - 1].Equals(4) && mapRotation[i, j - 1].Equals(90)) || (fullLevelMap[i, j - 1].Equals(3) && (mapRotation[i, j - 1].Equals(0) || mapRotation[i, j - 1].Equals(270))))
                         {
                             rotation = 180;
                         }
-                        else if (fullLevelMap[i, j + 1].Equals(4) || fullLevelMap[i, j + 1].Equals(3))
+
+                        //Checks if there is a correctly rotated wall or corner to the right
+                        //else if ((fullLevelMap[i, j + 1].Equals(4) && mapRotation[i, j + 1].Equals(90)) || (fullLevelMap[i, j + 1].Equals(3) && (mapRotation[i, j + 1].Equals(90) || mapRotation[i, j + 1].Equals(180))))
+                        else if ((fullLevelMap[i, j + 1].Equals(4)) || (fullLevelMap[i, j + 1].Equals(3)))
                         {
                             rotation = 270;
                         }
@@ -135,6 +153,7 @@ public class LevelGenerator : MonoBehaviour
 
                 }
                 Instantiate(mapParts[fullLevelMap[i,j]], startPos + new Vector3(j, -i, 0.0f), Quaternion.Euler(0.0f, 0.0f, rotation));
+                mapRotation[i, j] = rotation;
                 rotation = 0;
             }
         }
