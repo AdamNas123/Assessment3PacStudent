@@ -32,6 +32,8 @@ public class LevelGenerator : MonoBehaviour
     public GameObject[] mapParts = new GameObject[8];
     private Vector3 startPos = new Vector3(-17.5f, -0.5f, 0.0f);
     private float rotation;
+    private float xScale;
+    private float yScale;
 
     private int[,] fullLevelMap;
     private float[,] mapRotation;
@@ -159,6 +161,35 @@ public class LevelGenerator : MonoBehaviour
                     }
                 }
 
+                //Standard Pellet Piece
+                if (fullLevelMap[i, j].Equals(5) || fullLevelMap[i, j].Equals(6))
+                {
+                    if (i < levelMap.GetLength(0)) 
+                    {
+                        yScale = 1;
+                        if (j < levelMap.GetLength(1))
+                        {
+                            xScale = 1;
+                        }
+                        else
+                        {
+                            xScale = -1;
+                        }
+                    }
+                    else
+                    {
+                        yScale = -1;
+                        if (j >= levelMap.GetLength(1))
+                        {
+                            xScale = -1;
+                        }
+                        else
+                        {
+                            xScale = 1;
+                        }
+                    }
+                }
+
                 //T Juncture Piece
                 if (fullLevelMap[i, j].Equals(7))
                 {
@@ -190,7 +221,12 @@ public class LevelGenerator : MonoBehaviour
                         }
                     }
                 }
-                Instantiate(mapParts[fullLevelMap[i,j]], startPos + new Vector3(j, -i, 0.0f), Quaternion.Euler(0.0f, 0.0f, rotation));
+                GameObject piece = Instantiate(mapParts[fullLevelMap[i,j]], startPos + new Vector3(j, -i, 0.0f), Quaternion.Euler(0.0f, 0.0f, rotation));
+                if (fullLevelMap[i, j].Equals(5) || fullLevelMap[i, j].Equals(6))
+                {
+                    piece.transform.localScale = new Vector3(piece.transform.localScale.x * xScale, piece.transform.localScale.y * yScale, 0.0f);
+
+                }
                 mapRotation[i, j] = rotation;
                 rotation = 0;
             }
