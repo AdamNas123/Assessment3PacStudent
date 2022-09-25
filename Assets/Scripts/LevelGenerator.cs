@@ -72,29 +72,29 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int j = 0; j < fullLevelMap.GetLength(1); ++j)
             {
-               /* if (levelMap[i,j].Equals(2))
+                if (fullLevelMap[i,j].Equals(2))
                 {
-                    if ((i-1) < 0 && (levelMap[i+1,j].Equals(0) || levelMap[i + 1, j].Equals(5) || levelMap[i + 1, j].Equals(6)))
+                    if ((i-1) < 0 && (fullLevelMap[i+1,j].Equals(0) || fullLevelMap[i + 1, j].Equals(5) || fullLevelMap[i + 1, j].Equals(6)))
                     {
                         rotation = 270;
                     }
-                    if ((j - 1) < 0 && (levelMap[i, j + 1].Equals(0) || levelMap[i, j + 1].Equals(5) || levelMap[i, j + 1].Equals(6)))
+                    if ((j - 1) < 0 && (fullLevelMap[i, j + 1].Equals(0) || fullLevelMap[i, j + 1].Equals(5) || fullLevelMap[i, j + 1].Equals(6)))
                     {
                         rotation = 0;
                     }
-                    if ((i + 1) > levelMap.GetLength(0) && (levelMap[i - 1, j].Equals(0) || levelMap[i - 1, j].Equals(5) || levelMap[i - 1, j].Equals(6)))
+                    if ((i + 1) == fullLevelMap.GetLength(0) && (fullLevelMap[i - 1, j].Equals(0) || fullLevelMap[i - 1, j].Equals(5) || fullLevelMap[i - 1, j].Equals(6)))
                     {
                         rotation = 90;
                     }
-                    if ((j + 1) > levelMap.GetLength(1) && (levelMap[i , j - 1].Equals(0) || levelMap[i, j - 1].Equals(5) || levelMap[i, j - 1].Equals(6)))
+                    if ((j + 1) == fullLevelMap.GetLength(1) && (fullLevelMap[i , j - 1].Equals(0) || fullLevelMap[i, j - 1].Equals(5) || fullLevelMap[i, j - 1].Equals(6)))
                     {
                         rotation = 180;
                     }
                 }
-                if (levelMap[i, j].Equals(3))
+                if (fullLevelMap[i, j].Equals(3))
                 {
 
-                }*/
+                }
                 Instantiate(mapParts[fullLevelMap[i,j]], startPos + new Vector3(j, -i, 0.0f), Quaternion.Euler(0.0f, 0.0f, rotation));
                 rotation = 0.0f;
             }
