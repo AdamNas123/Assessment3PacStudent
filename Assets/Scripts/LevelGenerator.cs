@@ -5,6 +5,10 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     private GameObject tilemap;
+    private GameObject powerPellet1;
+    private GameObject powerPellet2;
+    private GameObject powerPellet3;
+    private GameObject powerPellet4;
     int[,] levelMap =
     {
         {1,2,2,2,2,2,2,2,2,2,2,2,2,7},
@@ -36,8 +40,17 @@ public class LevelGenerator : MonoBehaviour
     {
         //Delete manual map
         tilemap = GameObject.Find("Grid");
-        Destroy(tilemap);
+        
+        powerPellet1 = GameObject.Find("Power Pellet (1)");
+        powerPellet2 = GameObject.Find("Power Pellet (2)");
+        powerPellet3 = GameObject.Find("Power Pellet (3)");
+        powerPellet4 = GameObject.Find("Power Pellet (4)");
 
+        Destroy(tilemap);
+        Destroy(powerPellet1);
+        Destroy(powerPellet2);
+        Destroy(powerPellet3);
+        Destroy(powerPellet4);
         //Extend given level map to get whole map
         fullLevelMap = new int[2 * levelMap.GetLength(0) - 1, 2 *  levelMap.GetLength(1)];
 
@@ -67,7 +80,7 @@ public class LevelGenerator : MonoBehaviour
             }
         }
 
-        //Create Rotation Array
+        //Create Rotation Array to store piece rotations
         mapRotation = new float[fullLevelMap.GetLength(0), fullLevelMap.GetLength(1)];
         
         //Create procedural map
@@ -109,16 +122,14 @@ public class LevelGenerator : MonoBehaviour
                             rotation = 90;
                         }
 
-                        //Checks if there is a correctly rotated wall or corner to the right
-                        //else if ((fullLevelMap[i, j + 1].Equals(4) && mapRotation[i, j + 1].Equals(90)) || (fullLevelMap[i, j + 1].Equals(3) && (mapRotation[i, j + 1].Equals(90) || mapRotation[i, j + 1].Equals(180))))
+                        //Checks if there is a wall or corner to the right
                         else if ((fullLevelMap[i, j + 1].Equals(4)) || (fullLevelMap[i, j + 1].Equals(3)))
                         {
                             rotation = 0;
                         }
                     }
 
-                    //Checks if there is a correctly rotated wall or corner on the bottom
-                    //else if ((fullLevelMap[i + 1, j].Equals(4) && mapRotation[i + 1, j].Equals(0)) || (fullLevelMap[i + 1, j].Equals(3) && ( mapRotation[i + 1, j].Equals(0) || mapRotation[i + 1, j].Equals(90))))
+                    //Checks if there is a wall or corner on the bottom
                     else if ((fullLevelMap[i + 1, j].Equals(4)) || (fullLevelMap[i + 1, j].Equals(3)))
                     {
                         //Checks if there is a correctly rotated wall or corner to the left
@@ -127,8 +138,7 @@ public class LevelGenerator : MonoBehaviour
                             rotation = 180;
                         }
 
-                        //Checks if there is a correctly rotated wall or corner to the right
-                        //else if ((fullLevelMap[i, j + 1].Equals(4) && mapRotation[i, j + 1].Equals(90)) || (fullLevelMap[i, j + 1].Equals(3) && (mapRotation[i, j + 1].Equals(90) || mapRotation[i, j + 1].Equals(180))))
+                        //Checks if there is a wall or corner to the right
                         else if ((fullLevelMap[i, j + 1].Equals(4)) || (fullLevelMap[i, j + 1].Equals(3)))
                         {
                             rotation = 270;
@@ -136,6 +146,7 @@ public class LevelGenerator : MonoBehaviour
                     }
                 }
 
+                //Inside Wall Piece
                 if (fullLevelMap[i, j].Equals(4))
                 {
                     if ((fullLevelMap[i - 1, j].Equals(4) || fullLevelMap[i - 1, j].Equals(3) || fullLevelMap[i - 1, j].Equals(7)) && (fullLevelMap[i + 1, j].Equals(4) || fullLevelMap[i + 1, j].Equals(3) || fullLevelMap[i + 1, j].Equals(7)) && (!fullLevelMap[i, j - 1].Equals(4) || !fullLevelMap[i, j + 1].Equals(3)))
@@ -148,9 +159,34 @@ public class LevelGenerator : MonoBehaviour
                     }
                 }
 
+                //T Juncture Piece
                 if (fullLevelMap[i, j].Equals(7))
                 {
-
+                    //Checks if there is an outside wall or t juncture at the top and bottom
+                    if ((fullLevelMap[i - 1, j].Equals(2) || fullLevelMap[i - 1, j].Equals(7)) && (fullLevelMap[i + 1, j].Equals(2) || fullLevelMap[i + 1, j].Equals(7)))
+                    {
+                        //Checks if there is an inside wall to the left
+                        if (fullLevelMap[i, j - 1].Equals(4) && mapRotation[i, j - 1].Equals(90))
+                        {
+                            rotation = 270;
+                        }
+                        else
+                        {
+                            rotation = 90;
+                        }   
+                    }
+                    //Checks if there is an outside wall or t juncture to the left and right
+                    else if ((fullLevelMap[i, j - 1].Equals(2) || fullLevelMap[i, j - 1].Equals(7)) && (fullLevelMap[i, j + 1].Equals(2) || fullLevelMap[i, j + 1].Equals(7)))
+                    {
+                        if (fullLevelMap[i - 1, j].Equals(4) && mapRotation[i - 1, j].Equals(0))
+                        {
+                            rotation = 180;
+                        }
+                        else
+                        {
+                            rotation = 0;
+                        }
+                    }
                 }
                 Instantiate(mapParts[fullLevelMap[i,j]], startPos + new Vector3(j, -i, 0.0f), Quaternion.Euler(0.0f, 0.0f, rotation));
                 mapRotation[i, j] = rotation;
