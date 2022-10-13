@@ -218,7 +218,7 @@ Animator:
   m_GameObject: {fileID: 303985949}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0d49719a68c417c4aad5b4ec5d5ff200, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -608,7 +608,7 @@ Animator:
   m_GameObject: {fileID: 633617858}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c5a475c835932b1408b622bae0706ee9, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -912,7 +912,7 @@ Animator:
   m_GameObject: {fileID: 988539651}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: db65bd5c3afbc7c4889bb2a7a707f970, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1227,7 +1227,7 @@ Animator:
   m_GameObject: {fileID: 1629147579}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 55bf1d77764ba2a4cbc87d820430fa01, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -8245,7 +8245,7 @@ GameObject:
   - component: {fileID: 1974047803}
   - component: {fileID: 1974047807}
   m_Layer: 0
-  m_Name: PacStudent (1)
+  m_Name: 'PacStudent '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
