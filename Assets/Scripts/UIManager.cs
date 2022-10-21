@@ -7,10 +7,13 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public GameObject exitButton;
+    private GameObject newButton;
+
+    private static GameObject instance;
     // Start is called before the first frame update
     void Start()
     {
-        //Instantiate(exitButton, new Vector3(0, 0, 0), Quaternion.identity);
+
     }
 
     // Update is called once per frame
@@ -23,13 +26,15 @@ public class UIManager : MonoBehaviour
     {
         
         SceneManager.LoadScene("Level1Scene");
-        
         DontDestroyOnLoad(gameObject);
-        //DontDestroyOnLoad(exitButton);
-        
-        //newButton.transform.SetParent(GameObject.Find("HUD").transform, false);
-        //exitButton.gameObject.SetActive(true);
-        
+        /*if (instance == null)
+        {
+            instance = gameObject;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }*/
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -42,6 +47,7 @@ public class UIManager : MonoBehaviour
 
     public void LoadStartScreen() 
     {
+        
         SceneManager.LoadScene("StartScene");
         //DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -51,9 +57,10 @@ public class UIManager : MonoBehaviour
     {
         if (scene.buildIndex == SceneManager.GetSceneByName("Level1Scene").buildIndex)
         {
-            GameObject newButton = Instantiate(exitButton.gameObject, new Vector3(0, 0, 0), Quaternion.identity);
+            newButton = Instantiate(exitButton.gameObject, new Vector3(0, 0, 0), Quaternion.identity);
             newButton.transform.SetParent(GameObject.Find("HUD").transform, false);
             newButton.GetComponent<Button>().onClick.AddListener(this.LoadStartScreen);
         }
+
     }
 }
