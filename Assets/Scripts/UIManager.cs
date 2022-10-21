@@ -6,12 +6,11 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public Button exitButton;
+    public GameObject exitButton;
     // Start is called before the first frame update
     void Start()
     {
-        //exitButton = GameObject.FindGameObjectWithTag("Exit");
-        exitButton.gameObject.SetActive(false);
+        //Instantiate(exitButton, new Vector3(0, 0, 0), Quaternion.identity);
     }
 
     // Update is called once per frame
@@ -22,12 +21,16 @@ public class UIManager : MonoBehaviour
 
     public void LoadFirstLevel()
     {
-        SceneManager.LoadScene("Level1Scene");
-        DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(exitButton);
-        exitButton.gameObject.SetActive(true);
         
-        //SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadScene("Level1Scene");
+        
+        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(exitButton);
+        
+        //newButton.transform.SetParent(GameObject.Find("HUD").transform, false);
+        //exitButton.gameObject.SetActive(true);
+        
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     /*public void LoadSecondLevel()
@@ -41,5 +44,16 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene("StartScene");
         //DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.buildIndex == SceneManager.GetSceneByName("Level1Scene").buildIndex)
+        {
+            GameObject newButton = Instantiate(exitButton.gameObject, new Vector3(0, 0, 0), Quaternion.identity);
+            newButton.transform.SetParent(GameObject.Find("HUD").transform, false);
+            newButton.GetComponent<Button>().onClick.AddListener(this.LoadStartScreen);
+        }
     }
 }
