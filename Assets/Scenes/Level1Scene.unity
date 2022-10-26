@@ -887,7 +887,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 335807135}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 686efaeb354d17e4eb8de76b3b848717, type: 3}
   m_Name: 
@@ -10952,7 +10952,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 1b3f74a03381e2d42af6b8b4f6c8b58b, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -11137,12 +11137,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweener: {fileID: 1974047809}
-  walls:
-  - {fileID: 1612275933783190303, guid: 12b7a8459edcf8e47818f85f65458188, type: 3}
-  - {fileID: 9015002411369843362, guid: 7bd816da59a346845ba9563ba2ced8e6, type: 3}
-  - {fileID: 3849666658955464209, guid: 7606059d5843e2a458bad660b83898c7, type: 3}
-  - {fileID: 5109546650941214271, guid: d0643cd9462680041bb13d06e0a5ded9, type: 3}
-  - {fileID: 4281533796193478869, guid: 4a4cd277514fd544eb335f0edacc1257, type: 3}
 --- !u!114 &1974047809
 MonoBehaviour:
   m_ObjectHideFlags: 0

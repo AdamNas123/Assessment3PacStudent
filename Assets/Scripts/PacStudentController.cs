@@ -113,6 +113,8 @@ public class PacStudentController : MonoBehaviour
                     currentInput = lastInput;
                     tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x - 1, gameObject.transform.position.y, 0.0f), 0.5f);
                     xPos -= 1;
+                    pacStudentAnimator.SetFloat("Moving", 1.0f);
+                    pacStudentAnimator.Play("PacStudentLeftAnim");
                 }
                 else
                 {
@@ -124,8 +126,11 @@ public class PacStudentController : MonoBehaviour
                 if (isWalkable(yPos, xPos + 1))
                 {
                     currentInput = lastInput;
+                    pacStudentAnimator.SetFloat("Moving", 1.0f);
                     tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, 0.0f), 0.5f);
                     xPos += 1;
+                    pacStudentAnimator.SetFloat("Moving", 1.0f);
+                    pacStudentAnimator.Play("PacStudentRightAnim");
                 }
                 else
                 {
@@ -139,6 +144,8 @@ public class PacStudentController : MonoBehaviour
                     currentInput = lastInput;
                     tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, 0.0f), 0.5f);
                     yPos += 1;
+                    pacStudentAnimator.SetFloat("Moving", 1.0f);
+                    pacStudentAnimator.Play("PacStudentDownAnim");
                 }
                 else
                 {
@@ -152,6 +159,8 @@ public class PacStudentController : MonoBehaviour
                     currentInput = lastInput;
                     tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, 0.0f), 0.5f);
                     yPos -= 1;
+                    pacStudentAnimator.SetFloat("Moving", 1.0f);
+                    pacStudentAnimator.Play("PacStudentUpAnim");
                 }
                 else
                 {
@@ -239,21 +248,33 @@ public class PacStudentController : MonoBehaviour
         {
             tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x - 1, gameObject.transform.position.y, 0.0f), 0.5f);
             xPos -= 1;
+            pacStudentAnimator.SetFloat("Moving", 1.0f);
+            pacStudentAnimator.Play("PacStudentLeftAnim");
         }
-        if (currentInput == "d" && isWalkable(yPos, xPos + 1))
+        else if (currentInput == "d" && isWalkable(yPos, xPos + 1))
         {
             tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, 0.0f), 0.5f);
             xPos += 1;
+            pacStudentAnimator.SetFloat("Moving", 1.0f);
+            pacStudentAnimator.Play("PacStudentRightAnim");
         }
-        if (currentInput == "s" && isWalkable(yPos + 1, xPos))
+        else if(currentInput == "s" && isWalkable(yPos + 1, xPos))
         {
             tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, 0.0f), 0.5f);
             yPos += 1;
+            pacStudentAnimator.SetFloat("Moving", 1.0f);
+            pacStudentAnimator.Play("PacStudentDownAnim");
         }
-        if (currentInput == "w" && isWalkable(yPos - 1, xPos))
+        else if(currentInput == "w" && isWalkable(yPos - 1, xPos))
         {
             tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, 0.0f), 0.5f);
             yPos -= 1;
+            pacStudentAnimator.SetFloat("Moving", 1.0f);
+            pacStudentAnimator.Play("PacStudentUpAnim");
+        }
+        else
+        {
+            pacStudentAnimator.SetFloat("Moving", 0.0f);
         }
     }
 }
