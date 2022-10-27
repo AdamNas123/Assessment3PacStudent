@@ -10,10 +10,13 @@ public class PacStudentController : MonoBehaviour
 
     private Animator pacStudentAnimator;
     [SerializeField]
+
     private AudioSource movingNoPellet;
     [SerializeField]
     private AudioSource movingWithPellet;
-
+    [SerializeField]
+    private AudioSource wallCollision;
+    private bool wallAudioPlayed = false;
     [SerializeField]
     private ParticleSystem dustParticleSystem;
 
@@ -117,10 +120,6 @@ public class PacStudentController : MonoBehaviour
                     
                     currentInput = lastInput;
                     Move("a");
-                    /*tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x - 1, gameObject.transform.position.y, 0.0f), 0.5f);
-                    xPos -= 1;
-                    pacStudentAnimator.SetFloat("Moving", 1.0f);
-                    pacStudentAnimator.Play("PacStudentLeftAnim"); */
                 }
                 else
                 {
@@ -133,10 +132,6 @@ public class PacStudentController : MonoBehaviour
                 {
                     currentInput = lastInput;
                     Move("d");
-                    /*tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, 0.0f), 0.5f);
-                    xPos += 1;
-                    pacStudentAnimator.SetFloat("Moving", 1.0f);
-                    pacStudentAnimator.Play("PacStudentRightAnim"); */
                 }
                 else
                 {
@@ -149,10 +144,6 @@ public class PacStudentController : MonoBehaviour
                 {
                     currentInput = lastInput;
                     Move("s");
-                    /*tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, 0.0f), 0.5f);
-                    yPos += 1;
-                    pacStudentAnimator.SetFloat("Moving", 1.0f);
-                    pacStudentAnimator.Play("PacStudentDownAnim"); */
                 }
                 else
                 {
@@ -165,10 +156,6 @@ public class PacStudentController : MonoBehaviour
                 {
                     currentInput = lastInput;
                     Move("w");
-                    /*tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, 0.0f), 0.5f);
-                    yPos -= 1;
-                    pacStudentAnimator.SetFloat("Moving", 1.0f);
-                    pacStudentAnimator.Play("PacStudentUpAnim"); */
                 }
                 else
                 {
@@ -194,38 +181,28 @@ public class PacStudentController : MonoBehaviour
         if (currentInput == "a" && isWalkable(yPos, xPos - 1))
         {
             Move("a");
-            /*tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x - 1, gameObject.transform.position.y, 0.0f), 0.5f);
-            xPos -= 1;
-            pacStudentAnimator.SetFloat("Moving", 1.0f);
-            pacStudentAnimator.Play("PacStudentLeftAnim"); */
         }
         else if (currentInput == "d" && isWalkable(yPos, xPos + 1))
         {
             Move("d");
-            /*tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, 0.0f), 0.5f);
-            xPos += 1;
-            pacStudentAnimator.SetFloat("Moving", 1.0f);
-            pacStudentAnimator.Play("PacStudentRightAnim"); */
         }
         else if(currentInput == "s" && isWalkable(yPos + 1, xPos))
         {
             Move("s");
-           /* tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, 0.0f), 0.5f);
-            yPos += 1;
-            pacStudentAnimator.SetFloat("Moving", 1.0f);
-            pacStudentAnimator.Play("PacStudentDownAnim"); */
         }
         else if(currentInput == "w" && isWalkable(yPos - 1, xPos))
         {
             Move("w");
-            /*tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, 0.0f), 0.5f);
-            yPos -= 1;
-            pacStudentAnimator.SetFloat("Moving", 1.0f);
-            pacStudentAnimator.Play("PacStudentUpAnim"); */
         }
         else
         {
             pacStudentAnimator.SetFloat("Moving", 0.0f);
+            if (!wallAudioPlayed)
+            {
+                wallCollision.Play();
+                wallAudioPlayed = true;
+            }
+            
         }
     }
 
@@ -262,6 +239,7 @@ public class PacStudentController : MonoBehaviour
        }
         PlayMovingAudio();
         dustParticleSystem.Play();
+        wallAudioPlayed = false;
     }
 
     private void PlayMovingAudio()
@@ -277,4 +255,5 @@ public class PacStudentController : MonoBehaviour
             //movingWithPellet.Play();
         }
     }
+
 }
