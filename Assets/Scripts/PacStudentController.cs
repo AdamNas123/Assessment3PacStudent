@@ -233,41 +233,44 @@ public class PacStudentController : MonoBehaviour
        {
             tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x - 1, gameObject.transform.position.y, 0.0f), 0.5f);
             xPos -= 1;
-            PlayMovingAudio();
+            //PlayMovingAudio();
             pacStudentAnimator.Play("PacStudentLeftAnim");
        }
        if (direction == "d")
        {
             tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, 0.0f), 0.5f);
             xPos += 1;
-            PlayMovingAudio();
+            //PlayMovingAudio();
             pacStudentAnimator.Play("PacStudentRightAnim");
        }
        if (direction == "s")
        {
             tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, 0.0f), 0.5f);
             yPos += 1;
-            PlayMovingAudio();
+            //PlayMovingAudio();
             pacStudentAnimator.Play("PacStudentDownAnim");
        }
        if (direction == "w")
        {
             tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, 0.0f), 0.5f);
             yPos -= 1;
-            PlayMovingAudio();
+           //PlayMovingAudio();
             pacStudentAnimator.Play("PacStudentUpAnim");
        }
+        PlayMovingAudio();
     }
 
     private void PlayMovingAudio()
     {
         if (fullLevelMap[yPos, xPos] == 5)
         {
-            movingWithPellet.Play();
+            movingWithPellet.PlayDelayed(0.16f);
+            //movingWithPellet.Play();
         }
         else if (fullLevelMap[yPos, xPos] == 0)
         {
-            movingNoPellet.Play();
+           movingNoPellet.PlayDelayed(0.16f);
+            //movingWithPellet.Play();
         }
     }
 }
