@@ -14,6 +14,9 @@ public class PacStudentController : MonoBehaviour
     [SerializeField]
     private AudioSource movingWithPellet;
 
+    [SerializeField]
+    private ParticleSystem dustParticleSystem;
+
     private string lastInput;
     private string currentInput;
 
@@ -258,11 +261,12 @@ public class PacStudentController : MonoBehaviour
             pacStudentAnimator.Play("PacStudentUpAnim");
        }
         PlayMovingAudio();
+        dustParticleSystem.Play();
     }
 
     private void PlayMovingAudio()
     {
-        if (fullLevelMap[yPos, xPos] == 5)
+        if (fullLevelMap[yPos, xPos] == 5 || fullLevelMap[yPos, xPos] == 6)
         {
             movingWithPellet.PlayDelayed(0.16f);
             //movingWithPellet.Play();
