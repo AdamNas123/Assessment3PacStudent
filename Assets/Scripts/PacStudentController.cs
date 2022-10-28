@@ -166,6 +166,10 @@ public class PacStudentController : MonoBehaviour
     }
     private bool isWalkable(int yPos, int xPos)
     {
+        if ((xPos < 0 && yPos == 14) || (xPos == fullLevelMap.GetLength(1) && yPos == 14))
+        {
+            return true;
+        }
         if (xPos < 0 || xPos == fullLevelMap.GetLength(1) || yPos < 0 || yPos == fullLevelMap.GetLength(0) || yPos == 12 && (xPos == 13 || xPos == 14) || yPos == 16 && (xPos == 13 || xPos == 14) || walls.Contains(fullLevelMap[yPos, xPos]))
         {
             return false;
@@ -211,30 +215,42 @@ public class PacStudentController : MonoBehaviour
        pacStudentAnimator.SetFloat("Moving", 1.0f);
        if (direction == "a")
        {
-            tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x - 1, gameObject.transform.position.y, 0.0f), 0.5f);
-            xPos -= 1;
-            //PlayMovingAudio();
-            pacStudentAnimator.Play("PacStudentLeftAnim");
+            if (xPos == 0 && yPos == 14)
+            {
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x + fullLevelMap.GetLength(1) - 1, gameObject.transform.position.y, 0.0f);
+                xPos = fullLevelMap.GetLength(1) - 1;
+            }
+            else
+            {
+                tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x - 1, gameObject.transform.position.y, 0.0f), 0.5f);
+                xPos -= 1;
+                pacStudentAnimator.Play("PacStudentLeftAnim");
+            }
        }
        if (direction == "d")
        {
-            tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, 0.0f), 0.5f);
-            xPos += 1;
-            //PlayMovingAudio();
-            pacStudentAnimator.Play("PacStudentRightAnim");
+            if (xPos == fullLevelMap.GetLength(1) - 1 && yPos == 14)
+            {
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x - fullLevelMap.GetLength(1) + 1, gameObject.transform.position.y, 0.0f);
+                xPos = 0;
+            }
+            else
+            {
+                tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x + 1, gameObject.transform.position.y, 0.0f), 0.5f);
+                xPos += 1;
+                pacStudentAnimator.Play("PacStudentRightAnim");
+            }
        }
        if (direction == "s")
        {
             tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, 0.0f), 0.5f);
             yPos += 1;
-            //PlayMovingAudio();
             pacStudentAnimator.Play("PacStudentDownAnim");
        }
        if (direction == "w")
        {
             tweener.AddTween(gameObject.transform, gameObject.transform.position, new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, 0.0f), 0.5f);
             yPos -= 1;
-           //PlayMovingAudio();
             pacStudentAnimator.Play("PacStudentUpAnim");
        }
         PlayMovingAudio();
@@ -247,12 +263,10 @@ public class PacStudentController : MonoBehaviour
         if (fullLevelMap[yPos, xPos] == 5 || fullLevelMap[yPos, xPos] == 6)
         {
             movingWithPellet.PlayDelayed(0.16f);
-            //movingWithPellet.Play();
         }
         else if (fullLevelMap[yPos, xPos] == 0)
         {
            movingNoPellet.PlayDelayed(0.16f);
-            //movingWithPellet.Play();
         }
     }
 
