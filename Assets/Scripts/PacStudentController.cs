@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class PacStudentController : MonoBehaviour
 {
@@ -23,6 +25,9 @@ public class PacStudentController : MonoBehaviour
 
     private string lastInput;
     private string currentInput;
+    [SerializeField]
+    private TMPro.TextMeshProUGUI scoreText;
+    private int currentScore = 0;
 
     private List<int> walls = new List<int>{ 1, 2, 3, 4, 7 };
 
@@ -88,6 +93,8 @@ public class PacStudentController : MonoBehaviour
         pacStudentAnimator = GetComponent<Animator>();
 
         pacStudentAnimator.SetFloat("Moving", 0.0f);
+
+        //scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
         //movingNoPellet.Play();
     }
 
@@ -282,6 +289,9 @@ public class PacStudentController : MonoBehaviour
     private void EatPellet()
     {
         tileMap.SetTile(tileMap.WorldToCell(gameObject.transform.position), null);
+        //Destroy(tileMap.GetTile(tileMap.WorldToCell(gameObject.transform.position)));
+        currentScore += 10;
         fullLevelMap[yPos, xPos] = 0;
+        scoreText.text = currentScore.ToString();
     }
 }

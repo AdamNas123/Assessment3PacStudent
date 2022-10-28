@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
     private static GameObject newButton;
 
     private static GameObject instance;
+
+
     // Start is called before the first frame update
     void Start()
     {
