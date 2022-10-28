@@ -16018,6 +16018,7 @@ MonoBehaviour:
   movingWithPellet: {fileID: 1974047810}
   wallCollision: {fileID: 1974047811}
   dustParticleSystem: {fileID: 542806267}
+  tileMap: {fileID: 1648047750}
 --- !u!114 &1974047809
 MonoBehaviour:
   m_ObjectHideFlags: 0

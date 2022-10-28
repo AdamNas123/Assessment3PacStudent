@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PacStudentController : MonoBehaviour
 {
@@ -44,6 +45,9 @@ public class PacStudentController : MonoBehaviour
         {0,0,0,0,0,0,5,0,0,0,4,0,0,0},
     };
     private int[,] fullLevelMap;
+
+    [SerializeField]
+    private Tilemap tileMap; 
 
     //private bool[,] pacPosition = new bool[15, 14];
     private int xPos = 1;
@@ -253,9 +257,14 @@ public class PacStudentController : MonoBehaviour
             yPos -= 1;
             pacStudentAnimator.Play("PacStudentUpAnim");
        }
+
         PlayMovingAudio();
         dustParticleSystem.Play();
         wallAudioPlayed = false;
+        if (fullLevelMap[yPos, xPos] == 5)
+        {
+            EatPellet();
+        }
     }
 
     private void PlayMovingAudio()
@@ -270,4 +279,9 @@ public class PacStudentController : MonoBehaviour
         }
     }
 
+    private void EatPellet()
+    {
+        tileMap.SetTile(tileMap.WorldToCell(gameObject.transform.position), null);
+        fullLevelMap[yPos, xPos] = 0;
+    }
 }
