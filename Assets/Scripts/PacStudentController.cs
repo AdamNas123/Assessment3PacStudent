@@ -270,8 +270,9 @@ public class PacStudentController : MonoBehaviour
         wallAudioPlayed = false;
         if (fullLevelMap[yPos, xPos] == 5)
         {
-            EatPellet();
-        }
+            Invoke("EatPellet", 0.5f);
+            fullLevelMap[yPos, xPos] = 0;
+        } 
     }
 
     private void PlayMovingAudio()
@@ -290,8 +291,7 @@ public class PacStudentController : MonoBehaviour
     {
         tileMap.SetTile(tileMap.WorldToCell(gameObject.transform.position), null);
         //Destroy(tileMap.GetTile(tileMap.WorldToCell(gameObject.transform.position)));
-        currentScore += 10;
-        fullLevelMap[yPos, xPos] = 0;
+        currentScore += 10;   
         scoreText.text = currentScore.ToString();
     }
 }
