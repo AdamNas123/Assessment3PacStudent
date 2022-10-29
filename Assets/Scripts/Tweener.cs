@@ -19,21 +19,24 @@ public class Tweener : MonoBehaviour
         for (int i = activeTweens.Count - 1; i >= 0; i--) //Tween activeTween in activeTweens.Reverse<Tween>())
         {
             activeTween = activeTweens[i];
-
-            if (Vector3.Distance(activeTween.Target.position, activeTween.EndPos) > 0.1f)
-            {
-                float timeFraction = (Time.time - activeTween.StartTime) / activeTween.Duration;
-                //timeFraction = Mathf.Pow(timeFraction, 3);
-                activeTween.Target.position = Vector3.Lerp(activeTween.StartPos,
-                                                          activeTween.EndPos,
-                                                           timeFraction);
-            }
-            else
-            {
-                activeTween.Target.position = activeTween.EndPos;
-                //activeTween = null;
+                if (activeTween.Target == null)
+                {
                 activeTweens.RemoveAt(i);
-            }
+                }
+                else if (Vector3.Distance(activeTween.Target.position, activeTween.EndPos) > 0.1f)
+                {
+                    float timeFraction = (Time.time - activeTween.StartTime) / activeTween.Duration;
+                    //timeFraction = Mathf.Pow(timeFraction, 3);
+                    activeTween.Target.position = Vector3.Lerp(activeTween.StartPos,
+                                                              activeTween.EndPos,
+                                                               timeFraction);
+                }
+                else
+                {
+                    activeTween.Target.position = activeTween.EndPos;
+                    //activeTween = null;
+                    activeTweens.RemoveAt(i);
+                }    
         }
     }
 
@@ -52,7 +55,7 @@ public class Tweener : MonoBehaviour
     {
         foreach (Tween activeTween in activeTweens)
         {
-            if (activeTween.Target.transform == target)
+            if (target != null && activeTween.Target.transform == target)
                 return true;
         }
         return false;

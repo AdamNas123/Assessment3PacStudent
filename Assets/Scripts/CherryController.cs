@@ -5,7 +5,7 @@ using UnityEngine;
 public class CherryController : MonoBehaviour
 {
     [SerializeField]
-    private Tweener tweener;
+    public Tweener tweener;
     [SerializeField]
     private GameObject cherry;
     private GameObject currentCherry;
@@ -25,10 +25,14 @@ public class CherryController : MonoBehaviour
         {
             SpawnCherry();
         }
-        if (currentCherry != null && !tweener.TweenExists(currentCherry.transform))
+        if (currentCherry != null)
         {
-            Destroy(currentCherry);
+            if (!tweener.TweenExists(currentCherry.transform))
+            {
+                Destroy(currentCherry);
+            }
         }
+            
     }
 
     private void SpawnCherry()
@@ -65,7 +69,8 @@ public class CherryController : MonoBehaviour
 
         Vector3 spawnPos = Camera.main.ViewportToWorldPoint(new Vector3(xPos, yPos, 1.0f));
         currentCherry = Instantiate(cherry, spawnPos, Quaternion.identity);
+        //currentCherry = Instantiate(cherry, new Vector3(-14.5f, -1.5f, 0.0f), Quaternion.identity);
         Vector3 worldEndPos = Camera.main.ViewportToWorldPoint(endPos);
-        tweener.AddTween(currentCherry.transform, currentCherry.transform.position, worldEndPos, 5.0f);
+        tweener.AddTween(currentCherry.transform, currentCherry.transform.position, worldEndPos, 8.0f);
     }
 }

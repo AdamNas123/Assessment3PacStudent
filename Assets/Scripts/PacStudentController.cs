@@ -272,7 +272,12 @@ public class PacStudentController : MonoBehaviour
         {
             Invoke("EatPellet", 0.5f);
             fullLevelMap[yPos, xPos] = 0;
-        } 
+        }
+        if (fullLevelMap[yPos, xPos] == 6)
+        {
+            Invoke("EatPowerPellet", 0.5f);
+            fullLevelMap[yPos, xPos] = 0;
+        }
     }
 
     private void PlayMovingAudio()
@@ -290,8 +295,27 @@ public class PacStudentController : MonoBehaviour
     private void EatPellet()
     {
         tileMap.SetTile(tileMap.WorldToCell(gameObject.transform.position), null);
-        //Destroy(tileMap.GetTile(tileMap.WorldToCell(gameObject.transform.position)));
         currentScore += 10;   
         scoreText.text = currentScore.ToString();
+    }
+
+    private void EatPowerPellet()
+    {
+        tileMap.SetTile(tileMap.WorldToCell(gameObject.transform.position), null);
+        //Change ghost animator
+        //Change background music
+        //Start timer?
+        scoreText.text = currentScore.ToString();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("cherry"))
+        {
+            Destroy(GameObject.FindGameObjectWithTag("cherry"));
+            //GameObject.FindGameObjectWithTag("cherry") = null;
+            currentScore += 100;
+            scoreText.text = currentScore.ToString();
+        }
     }
 }
