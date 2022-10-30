@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -44,6 +45,9 @@ public class PacStudentController : MonoBehaviour
     private TMPro.TextMeshProUGUI scoreText;
     private int currentScore = 0;
 
+    private float gameTimer = 0.0f;
+    public TMPro.TextMeshProUGUI gameTimerText;
+
     private float ghostScaredTimer = 0.0f;
     private bool isScaredTimerRunning = false;
     public Image ghostScaredTimerUI;
@@ -79,6 +83,8 @@ public class PacStudentController : MonoBehaviour
     //private bool[,] pacPosition = new bool[15, 14];
     private int xPos = 1;
     private int yPos = 1;
+
+    private Vector3 originalPos;
     
     // Start is called before the first frame update
     void Start()
@@ -111,6 +117,7 @@ public class PacStudentController : MonoBehaviour
                 }
             }
         }
+        originalPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
         pacStudentAnimator = GetComponent<Animator>();
         pacStudentAnimator.SetFloat("Moving", 0.0f);
@@ -122,106 +129,107 @@ public class PacStudentController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ghostScaredTimerUI.enabled = false;
-        if (isScaredTimerRunning)
-        {
-            ghostScaredTimerUI.enabled = true;
-            if (ghostScaredTimer < 3.1)
+            gameTimer += Time.deltaTime;
+            gameTimerText.text = FormatTime(gameTimer);
+            ghostScaredTimerUI.enabled = false;
+            if (isScaredTimerRunning)
             {
-                ghost1Animator.Play("GhostRecoveringAnim");
-                ghost2Animator.Play("GhostRecoveringAnim");
-                ghost3Animator.Play("GhostRecoveringAnim");
-                ghost4Animator.Play("GhostRecoveringAnim");
-            }
-            if (ghostScaredTimer > 0)
-            {
-                ghostScaredTimer -= Time.deltaTime;
-                ghostScaredTimerText.text = ghostScaredTimer.ToString("0");
-            }
-            else
-            {
-                ghostScaredTimer = 0;
-                isScaredTimerRunning = false;
-                ghostScaredTimerUI.gameObject.SetActive(false);
+                ghostScaredTimerUI.enabled = true;
+                if (ghostScaredTimer < 3.1)
+                {
+                    ghost1Animator.Play("GhostRecoveringAnim");
+                    ghost2Animator.Play("GhostRecoveringAnim");
+                    ghost3Animator.Play("GhostRecoveringAnim");
+                    ghost4Animator.Play("GhostRecoveringAnim");
+                }
+                if (ghostScaredTimer > 0)
+                {
+                    ghostScaredTimerText.text = ghostScaredTimer.ToString("0");
+                }
+                else
+                {
+                    ghostScaredTimer = 0;
+                    isScaredTimerRunning = false;
+                    ghostScaredTimerUI.gameObject.SetActive(false);
 
-                //Set animators back to walking states - Update for 90% section
-                ghost1Animator.Play("Ghost1UpAnim");
-                ghost2Animator.Play("Ghost2UpAnim");
-                ghost3Animator.Play("Ghost3UpAnim");
-                ghost4Animator.Play("Ghost4UpAnim");
+                    //Set animators back to walking states - Update for 90% section
+                    ghost1Animator.Play("Ghost1UpAnim");
+                    ghost2Animator.Play("Ghost2UpAnim");
+                    ghost3Animator.Play("Ghost3UpAnim");
+                    ghost4Animator.Play("Ghost4UpAnim");
 
-                backgroundMusic.scaredStateSource.Stop();
-                backgroundMusic.normalStateSource.Play();
+                    backgroundMusic.scaredStateSource.Stop();
+                    backgroundMusic.normalStateSource.Play();
+                }
             }
-        }
-        if (Input.GetKeyDown("a"))
-        {
-            lastInput = "a";
-        }
-        if (Input.GetKeyDown("d"))
-        {
-            lastInput = "d";
-        }
-        if (Input.GetKeyDown("s"))
-        {
-            lastInput = "s";
-        }
-        if (Input.GetKeyDown("w"))
-        {
-            lastInput = "w";
-        }
-        if (!tweener.TweenExists(gameObject.transform))
-        {
-            if (lastInput == "a")
+            if (Input.GetKeyDown("a"))
             {
-                if (isWalkable(yPos, xPos - 1))
-                {
-                    
-                    currentInput = lastInput;
-                    Move("a");
-                }
-                else
-                {
-                    checkCurrentInput(currentInput);
-                }
+                lastInput = "a";
             }
-            else if (lastInput == "d")
+            if (Input.GetKeyDown("d"))
             {
-                if (isWalkable(yPos, xPos + 1))
-                {
-                    currentInput = lastInput;
-                    Move("d");
-                }
-                else
-                {
-                    checkCurrentInput(currentInput);
-                }
+                lastInput = "d";
             }
-            else if (lastInput == "s")
+            if (Input.GetKeyDown("s"))
             {
-                if (isWalkable(yPos + 1, xPos))
-                {
-                    currentInput = lastInput;
-                    Move("s");
-                }
-                else
-                {
-                    checkCurrentInput(currentInput);
-                }
+                lastInput = "s";
             }
-            else if (lastInput == "w")
+            if (Input.GetKeyDown("w"))
             {
-                if (isWalkable(yPos - 1, xPos))
+                lastInput = "w";
+            }
+            if (!tweener.TweenExists(gameObject.transform))
+            {
+                if (lastInput == "a")
                 {
-                    currentInput = lastInput;
-                    Move("w");
+                    if (isWalkable(yPos, xPos - 1))
+                    {
+
+                        currentInput = lastInput;
+                        Move("a");
+                    }
+                    else
+                    {
+                        checkCurrentInput(currentInput);
+                    }
                 }
-                else
+                else if (lastInput == "d")
                 {
-                    checkCurrentInput(currentInput);
+                    if (isWalkable(yPos, xPos + 1))
+                    {
+                        currentInput = lastInput;
+                        Move("d");
+                    }
+                    else
+                    {
+                        checkCurrentInput(currentInput);
+                    }
+                }
+                else if (lastInput == "s")
+                {
+                    if (isWalkable(yPos + 1, xPos))
+                    {
+                        currentInput = lastInput;
+                        Move("s");
+                    }
+                    else
+                    {
+                        checkCurrentInput(currentInput);
+                    }
+                }
+                else if (lastInput == "w")
+                {
+                    if (isWalkable(yPos - 1, xPos))
+                    {
+                        currentInput = lastInput;
+                        Move("w");
+                    }
+                    else
+                    {
+                        checkCurrentInput(currentInput);
+                    }
                 }
             }
-        }
     }
     private bool isWalkable(int yPos, int xPos)
     {
@@ -387,19 +395,80 @@ public class PacStudentController : MonoBehaviour
                 //Set ghost back to walking after 5 seconds
             }
         }
+        if (collision.gameObject.CompareTag("ghost2"))
+        {
+            if (ghost2Animator.GetCurrentAnimatorStateInfo(0).IsName("Ghost2UpAnim") || ghost2Animator.GetCurrentAnimatorStateInfo(0).IsName("Ghost2DownAnim") || ghost2Animator.GetCurrentAnimatorStateInfo(0).IsName("Ghost2LeftAnim") || ghost2Animator.GetCurrentAnimatorStateInfo(0).IsName("Ghost2RightAnim"))
+            {
+                KillPacstudent();
+            }
+            else if (ghost2Animator.GetCurrentAnimatorStateInfo(0).IsName("GhostScaredAnim") || ghost2Animator.GetCurrentAnimatorStateInfo(0).IsName("GhostRecoveringAnim"))
+            {
+                ghost2Animator.Play("GhostDeadAnim");
+                backgroundMusic.deadStateSource.Play();
+                currentScore += 300;
+                scoreText.text = currentScore.ToString();
+                //Set ghost back to walking after 5 seconds
+            }
+        }
+        if (collision.gameObject.CompareTag("ghost3"))
+        {
+            if (ghost3Animator.GetCurrentAnimatorStateInfo(0).IsName("Ghost3UpAnim") || ghost3Animator.GetCurrentAnimatorStateInfo(0).IsName("Ghost3DownAnim") || ghost3Animator.GetCurrentAnimatorStateInfo(0).IsName("Ghost3LeftAnim") || ghost3Animator.GetCurrentAnimatorStateInfo(0).IsName("Ghost3RightAnim"))
+            {
+                KillPacstudent();
+            }
+            else if (ghost3Animator.GetCurrentAnimatorStateInfo(0).IsName("GhostScaredAnim") || ghost3Animator.GetCurrentAnimatorStateInfo(0).IsName("GhostRecoveringAnim"))
+            {
+                ghost3Animator.Play("GhostDeadAnim");
+                backgroundMusic.deadStateSource.Play();
+                currentScore += 300;
+                scoreText.text = currentScore.ToString();
+                //Set ghost back to walking after 5 seconds
+            }
+        }
+        if (collision.gameObject.CompareTag("ghost4"))
+        {
+            if (ghost4Animator.GetCurrentAnimatorStateInfo(0).IsName("Ghost4UpAnim") || ghost4Animator.GetCurrentAnimatorStateInfo(0).IsName("Ghost4DownAnim") || ghost4Animator.GetCurrentAnimatorStateInfo(0).IsName("Ghost4LeftAnim") || ghost4Animator.GetCurrentAnimatorStateInfo(0).IsName("Ghost4RightAnim"))
+            {
+                KillPacstudent();
+            }
+            else if (ghost4Animator.GetCurrentAnimatorStateInfo(0).IsName("GhostScaredAnim") || ghost4Animator.GetCurrentAnimatorStateInfo(0).IsName("GhostRecoveringAnim"))
+            {
+                ghost4Animator.Play("GhostDeadAnim");
+                backgroundMusic.deadStateSource.Play();
+                currentScore += 300;
+                scoreText.text = currentScore.ToString();
+                //Set ghost back to walking after 5 seconds
+            }
+        } 
     }
-
     private void KillPacstudent()
     {
-        Destroy(lives[lives.Count - 1]);
+        //transform.position = originalPos;
+        Physics2D.SyncTransforms();
+        lastInput = null;
+        currentInput = null;
+        transform.position = new Vector3(-16.5f, -1.5f, 0);
+        if (lives.Count > 0)
+        {
+            Destroy(lives[lives.Count - 1]);
+            lives.RemoveAt(lives.Count - 1);
+        }
+        
         //Play Particle Death effect
         xPos = 1;
         yPos = 1;
         deathSoundEffect.Play();
-        Debug.Log(gameObject.transform.position);
-        gameObject.transform.position = new Vector3(-16.5f, -1.5f, 0.0f);
-        Debug.Log(gameObject.transform.position);
-        lastInput = null;
-        currentInput = null;
+        pacStudentAnimator.SetFloat("Moving", 0.0f);
+    }
+
+    private string FormatTime(float time)
+    {
+        int intTime = (int)time;
+        int minutes = intTime / 60;
+        int seconds = intTime % 60;
+        float fraction = time * 1000;
+        fraction = (fraction % 100);
+        string timeText = String.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, fraction);
+        return timeText;
     }
 }

@@ -12,26 +12,28 @@ public class CherryController : MonoBehaviour
     private string[] positions = { "x", "y" }; 
     private float xPos;
     private float yPos;
+
     // Start is called before the first frame update
     void Start()
     {
-       
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if ((int)Time.time > 0 && (int)Time.time % 10 == 0 && currentCherry == null)
-        {
-            SpawnCherry();
-        }
-        if (currentCherry != null)
-        {
-            if (!tweener.TweenExists(currentCherry.transform))
+
+            if ((int)Time.time > 0 && (int)Time.time % 10 == 0 && currentCherry == null)
             {
-                Destroy(currentCherry);
+                SpawnCherry();
             }
-        }   
+            if (currentCherry != null)
+            {
+                if (!tweener.TweenExists(currentCherry.transform))
+                {
+                    Destroy(currentCherry);
+                }
+            }
     }
 
     private void SpawnCherry()

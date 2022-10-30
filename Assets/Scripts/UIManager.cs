@@ -11,7 +11,6 @@ public class UIManager : MonoBehaviour
 
     private static GameObject instance;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +20,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+ 
     }
 
     public void LoadFirstLevel()
@@ -57,10 +56,11 @@ public class UIManager : MonoBehaviour
     {
         if (scene.buildIndex == SceneManager.GetSceneByName("Level1Scene").buildIndex)
         {
-                Destroy(newButton);
-                newButton = Instantiate(exitButton, new Vector3(0, 0, 0), Quaternion.identity);
-                newButton.transform.SetParent(GameObject.Find("HUD").transform, false);
-                newButton.GetComponent<Button>().onClick.AddListener(this.LoadStartScreen);
+            Destroy(newButton);
+            newButton = Instantiate(exitButton, new Vector3(0, 0, 0), Quaternion.identity);
+            newButton.transform.SetParent(GameObject.Find("HUD").transform, false);
+            newButton.GetComponent<Button>().onClick.AddListener(this.LoadStartScreen);
+            //Start timer on hud
         }
 
     }
