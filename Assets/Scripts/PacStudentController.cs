@@ -11,9 +11,21 @@ public class PacStudentController : MonoBehaviour
     [SerializeField]
     private Tweener tweener;
 
-    private Animator pacStudentAnimator;
-    [SerializeField]
+    private PlayAudio backgroundMusic;
 
+    private Animator pacStudentAnimator;
+
+    public Animator ghost1Animator;
+    public Animator ghost2Animator;
+    public Animator ghost3Animator;
+    public Animator ghost4Animator;
+
+    public GameObject powerPellet1;
+    public GameObject powerPellet2;
+    public GameObject powerPellet3;
+    public GameObject powerPellet4;
+
+    [SerializeField]
     private AudioSource movingNoPellet;
     [SerializeField]
     private AudioSource movingWithPellet;
@@ -25,9 +37,15 @@ public class PacStudentController : MonoBehaviour
 
     private string lastInput;
     private string currentInput;
+
     [SerializeField]
     private TMPro.TextMeshProUGUI scoreText;
     private int currentScore = 0;
+
+    private float ghostScaredTimer = 0.0f;
+    private bool isScaredTimerRunning = false;
+    public Image ghostScaredTimerUI;
+    public TMPro.TextMeshProUGUI ghostScaredTimerText;
 
     private List<int> walls = new List<int>{ 1, 2, 3, 4, 7 };
 
@@ -91,21 +109,45 @@ public class PacStudentController : MonoBehaviour
         }
 
         pacStudentAnimator = GetComponent<Animator>();
-
         pacStudentAnimator.SetFloat("Moving", 0.0f);
 
-        //scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
-        //movingNoPellet.Play();
+        backgroundMusic = GameObject.FindGameObjectWithTag("music").GetComponent<PlayAudio>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*float leftPos = gameObject.transform.position.x - 1;
-        float rightPos = gameObject.transform.position.x + 1;
-        float downPos = gameObject.transform.position.y - 1;
-        float upPos = gameObject.transform.position.y + 1; */
+        ghostScaredTimerUI.enabled = false;
+        if (isScaredTimerRunning)
+        {
+            ghostScaredTimerUI.enabled = true;
+            if (ghostScaredTimer < 3.1 )
+            {
+                ghost1Animator.Play("GhostRecoveringAnim");
+                ghost2Animator.Play("GhostRecoveringAnim");
+                ghost3Animator.Play("GhostRecoveringAnim");
+                ghost4Animator.Play("GhostRecoveringAnim");
+            }
+            if (ghostScaredTimer > 0)
+            {
+                ghostScaredTimer -= Time.deltaTime;
+                ghostScaredTimerText.text = ghostScaredTimer.ToString("0");
+            }
+            else
+            {
+                ghostScaredTimer = 0;
+                isScaredTimerRunning = false;
+                ghostScaredTimerUI.gameObject.SetActive(false);
 
+                //Set animators back to walking states - Update for 90% section
+                ghost1Animator.Play("Ghost1UpAnim");
+                ghost2Animator.Play("Ghost2UpAnim");
+                ghost3Animator.Play("Ghost3UpAnim");
+                ghost4Animator.Play("Ghost4UpAnim");
+                
+            }
+        }
         if (Input.GetKeyDown("a"))
         {
             lastInput = "a";
@@ -273,11 +315,6 @@ public class PacStudentController : MonoBehaviour
             Invoke("EatPellet", 0.5f);
             fullLevelMap[yPos, xPos] = 0;
         }
-        if (fullLevelMap[yPos, xPos] == 6)
-        {
-            Invoke("EatPowerPellet", 0.5f);
-            fullLevelMap[yPos, xPos] = 0;
-        }
     }
 
     private void PlayMovingAudio()
@@ -299,23 +336,33 @@ public class PacStudentController : MonoBehaviour
         scoreText.text = currentScore.ToString();
     }
 
-    private void EatPowerPellet()
-    {
-        tileMap.SetTile(tileMap.WorldToCell(gameObject.transform.position), null);
-        //Change ghost animator
-        //Change background music
-        //Start timer?
-        scoreText.text = currentScore.ToString();
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("cherry"))
         {
             Destroy(GameObject.FindGameObjectWithTag("cherry"));
-            //GameObject.FindGameObjectWithTag("cherry") = null;
             currentScore += 100;
             scoreText.text = currentScore.ToString();
+        }
+
+        if (collision.gameObject.CompareTag("power"))
+        {
+            Destroy(collision.gameObject);
+            fullLevelMap[yPos, xPos] = 0;
+
+            //Change ghost animator
+            ghost1Animator.Play("GhostScaredAnim");
+            ghost2Animator.Play("GhostScaredAnim");
+            ghost3Animator.Play("GhostScaredAnim");
+            ghost4Animator.Play("GhostScaredAnim");
+
+            //Change background music
+            backgroundMusic.scaredStateSource.Play();
+            //Start timer?
+            isScaredTimerRunning = true;
+            ghostScaredTimer = 10.0f;
+            ghostScaredTimerUI.gameObject.SetActive(true);
+            ghostScaredTimerText.text = ghostScaredTimer.ToString("0");
         }
     }
 }

@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class PlayAudio : MonoBehaviour
 {
-    public AudioSource introSource;
     public AudioSource normalStateSource;
+    public AudioSource scaredStateSource;
     // Start is called before the first frame update
     void Start()
     {
-        introSource.Play();
-        normalStateSource.PlayDelayed(introSource.clip.length);
+        normalStateSource.Play();
     }
 
     // Update is called once per frame

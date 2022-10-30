@@ -31,8 +31,7 @@ public class CherryController : MonoBehaviour
             {
                 Destroy(currentCherry);
             }
-        }
-            
+        }   
     }
 
     private void SpawnCherry()

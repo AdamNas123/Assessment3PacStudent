@@ -509,7 +509,7 @@ Animator:
   m_GameObject: {fileID: 303985949}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0d49719a68c417c4aad5b4ec5d5ff200, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -668,7 +668,7 @@ GameObject:
   - component: {fileID: 335807139}
   m_Layer: 0
   m_Name: Background Music
-  m_TagString: Untagged
+  m_TagString: music
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -699,10 +699,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a9ca20d7567566f45ba5c60770f95bac, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -794,7 +794,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 21d852dbe54f8ab4cb8aca67bf4f067b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 73031ce4fcb3182499ef6683d7b8115e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -887,13 +887,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 335807135}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 686efaeb354d17e4eb8de76b3b848717, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introSource: {fileID: 335807138}
   normalStateSource: {fileID: 335807137}
+  scaredStateSource: {fileID: 335807138}
 --- !u!1 &390588205
 GameObject:
   m_ObjectHideFlags: 0
@@ -6309,7 +6309,7 @@ Animator:
   m_GameObject: {fileID: 633617858}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c5a475c835932b1408b622bae0706ee9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7124,7 +7124,7 @@ Animator:
   m_GameObject: {fileID: 988539651}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: db65bd5c3afbc7c4889bb2a7a707f970, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7404,6 +7404,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1047535501}
   m_CullTransparentMesh: 1
+--- !u!1 &1085051930 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2779883505338798249, guid: 2d8b71b572233134b80fee12a2416f47, type: 3}
+  m_PrefabInstance: {fileID: 2779883504258096745}
+  m_PrefabAsset: {fileID: 0}
+--- !u!70 &1085051934
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085051930}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.59, y: 1.36}
+  m_Direction: 0
 --- !u!1 &1106117820
 GameObject:
   m_ObjectHideFlags: 0
@@ -7415,9 +7436,10 @@ GameObject:
   - component: {fileID: 1106117823}
   - component: {fileID: 1106117822}
   - component: {fileID: 1106117821}
+  - component: {fileID: 1106117824}
   m_Layer: 0
   m_Name: Power Pellet (3)
-  m_TagString: Untagged
+  m_TagString: power
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7509,6 +7531,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &1106117824
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106117820}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.59, y: 1.36}
+  m_Direction: 0
 --- !u!1 &1111670113
 GameObject:
   m_ObjectHideFlags: 0
@@ -7598,9 +7636,10 @@ GameObject:
   - component: {fileID: 1181411014}
   - component: {fileID: 1181411013}
   - component: {fileID: 1181411012}
+  - component: {fileID: 1181411015}
   m_Layer: 0
   m_Name: Power Pellet (4)
-  m_TagString: Untagged
+  m_TagString: power
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7692,6 +7731,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &1181411015
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1181411011}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.59, y: 1.36}
+  m_Direction: 0
 --- !u!1 &1211638876
 GameObject:
   m_ObjectHideFlags: 0
@@ -8475,7 +8530,7 @@ Animator:
   m_GameObject: {fileID: 1629147579}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 55bf1d77764ba2a4cbc87d820430fa01, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -15699,9 +15754,10 @@ GameObject:
   - component: {fileID: 1934406820}
   - component: {fileID: 1934406819}
   - component: {fileID: 1934406818}
+  - component: {fileID: 1934406821}
   m_Layer: 0
   m_Name: Power Pellet (2)
-  m_TagString: Untagged
+  m_TagString: power
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15793,6 +15849,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &1934406821
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934406817}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.59, y: 1.36}
+  m_Direction: 0
 --- !u!1 &1974047802
 GameObject:
   m_ObjectHideFlags: 0
@@ -16016,11 +16088,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweener: {fileID: 1974047809}
+  ghost1Animator: {fileID: 1629147582}
+  ghost2Animator: {fileID: 633617861}
+  ghost3Animator: {fileID: 988539654}
+  ghost4Animator: {fileID: 303985952}
+  powerPellet1: {fileID: 1085051930}
+  powerPellet2: {fileID: 1934406817}
+  powerPellet3: {fileID: 1106117820}
+  powerPellet4: {fileID: 1181411011}
   movingNoPellet: {fileID: 1974047807}
   movingWithPellet: {fileID: 1974047810}
   wallCollision: {fileID: 1974047811}
   dustParticleSystem: {fileID: 542806267}
   scoreText: {fileID: 997884823}
+  ghostScaredTimerUI: {fileID: 1111670115}
+  ghostScaredTimerText: {fileID: 1790889273}
   tileMap: {fileID: 1648047750}
 --- !u!114 &1974047809
 MonoBehaviour:
@@ -21088,6 +21170,10 @@ PrefabInstance:
     - target: {fileID: 2779883505338798249, guid: 2d8b71b572233134b80fee12a2416f47, type: 3}
       propertyPath: m_Name
       value: Power Pellet (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2779883505338798249, guid: 2d8b71b572233134b80fee12a2416f47, type: 3}
+      propertyPath: m_TagString
+      value: power
       objectReference: {fileID: 0}
     - target: {fileID: 2779883505338798250, guid: 2d8b71b572233134b80fee12a2416f47, type: 3}
       propertyPath: m_RootOrder
