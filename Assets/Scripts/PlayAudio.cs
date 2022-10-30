@@ -6,6 +6,7 @@ public class PlayAudio : MonoBehaviour
 {
     public AudioSource normalStateSource;
     public AudioSource scaredStateSource;
+    public AudioSource deadStateSource;
     // Start is called before the first frame update
     void Start()
     {

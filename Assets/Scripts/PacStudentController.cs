@@ -31,6 +31,8 @@ public class PacStudentController : MonoBehaviour
     private AudioSource movingWithPellet;
     [SerializeField]
     private AudioSource wallCollision;
+    [SerializeField]
+    private AudioSource deathSoundEffect;
     private bool wallAudioPlayed = false;
     [SerializeField]
     private ParticleSystem dustParticleSystem;
@@ -46,6 +48,8 @@ public class PacStudentController : MonoBehaviour
     private bool isScaredTimerRunning = false;
     public Image ghostScaredTimerUI;
     public TMPro.TextMeshProUGUI ghostScaredTimerText;
+
+    public List<Image> lives = new List<Image>();
 
     private List<int> walls = new List<int>{ 1, 2, 3, 4, 7 };
 
@@ -122,7 +126,7 @@ public class PacStudentController : MonoBehaviour
         if (isScaredTimerRunning)
         {
             ghostScaredTimerUI.enabled = true;
-            if (ghostScaredTimer < 3.1 )
+            if (ghostScaredTimer < 3.1)
             {
                 ghost1Animator.Play("GhostRecoveringAnim");
                 ghost2Animator.Play("GhostRecoveringAnim");
@@ -145,7 +149,9 @@ public class PacStudentController : MonoBehaviour
                 ghost2Animator.Play("Ghost2UpAnim");
                 ghost3Animator.Play("Ghost3UpAnim");
                 ghost4Animator.Play("Ghost4UpAnim");
-                
+
+                backgroundMusic.scaredStateSource.Stop();
+                backgroundMusic.normalStateSource.Play();
             }
         }
         if (Input.GetKeyDown("a"))
@@ -357,6 +363,7 @@ public class PacStudentController : MonoBehaviour
             ghost4Animator.Play("GhostScaredAnim");
 
             //Change background music
+            backgroundMusic.normalStateSource.Stop();
             backgroundMusic.scaredStateSource.Play();
             //Start timer?
             isScaredTimerRunning = true;
@@ -364,5 +371,35 @@ public class PacStudentController : MonoBehaviour
             ghostScaredTimerUI.gameObject.SetActive(true);
             ghostScaredTimerText.text = ghostScaredTimer.ToString("0");
         }
+
+        if (collision.gameObject.CompareTag("ghost1"))
+        {
+            if (ghost1Animator.GetCurrentAnimatorStateInfo(0).IsName("Ghost1UpAnim") || ghost1Animator.GetCurrentAnimatorStateInfo(0).IsName("Ghost1DownAnim") || ghost1Animator.GetCurrentAnimatorStateInfo(0).IsName("Ghost1LeftAnim") || ghost1Animator.GetCurrentAnimatorStateInfo(0).IsName("Ghost1RightAnim"))
+            {
+                KillPacstudent();
+            }
+            else if (ghost1Animator.GetCurrentAnimatorStateInfo(0).IsName("GhostScaredAnim") || ghost1Animator.GetCurrentAnimatorStateInfo(0).IsName("GhostRecoveringAnim"))
+            {
+                ghost1Animator.Play("GhostDeadAnim");
+                backgroundMusic.deadStateSource.Play();
+                currentScore += 300;
+                scoreText.text = currentScore.ToString();
+                //Set ghost back to walking after 5 seconds
+            }
+        }
+    }
+
+    private void KillPacstudent()
+    {
+        Destroy(lives[lives.Count - 1]);
+        //Play Particle Death effect
+        xPos = 1;
+        yPos = 1;
+        deathSoundEffect.Play();
+        Debug.Log(gameObject.transform.position);
+        gameObject.transform.position = new Vector3(-16.5f, -1.5f, 0.0f);
+        Debug.Log(gameObject.transform.position);
+        lastInput = null;
+        currentInput = null;
     }
 }

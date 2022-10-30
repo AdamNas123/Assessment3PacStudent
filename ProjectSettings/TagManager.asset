@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - music
+  - Score
+  - power
+  - cherry
+  - ghost1
+  - ghost2
+  - ghost3
+  - ghost4
   layers:
   - Default
   - TransparentFX
